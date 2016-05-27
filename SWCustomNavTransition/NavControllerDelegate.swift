@@ -15,6 +15,11 @@ class NavControllerDelegate: NSObject, UINavigationControllerDelegate {
 		fromViewController fromVC: UIViewController,
 		toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 
+			// if you only want custom transition on Pop, uncomment these next 3 lines
+//			if operation != .Pop {
+//				return nil
+//			}
+
 			var bPushing : Bool = true
 			
 			if operation == .Pop {

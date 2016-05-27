@@ -11,7 +11,7 @@ import UIKit
 class VertTransAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 
 	let isPushing : Bool
-	let duration :NSTimeInterval = 0.5
+	let duration : NSTimeInterval = 0.5
 	
 	init(isPushing: Bool) {
 		self.isPushing = isPushing
@@ -41,24 +41,10 @@ class VertTransAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 				return
 		}
 		
-		let vUP		: CGFloat = -1
-		let vDOWN	: CGFloat = 1
+		let vUP		: CGFloat = 1
+		let vDOWN	: CGFloat = -1
 		
-		var dir : CGFloat = isPushing ? vUP : vDOWN
-		
-		guard
-			let parentNavVC = vc1.parentViewController as? UINavigationController
-			else {
-				return
-		}
-		
-		let pVCs = parentNavVC.viewControllers
-		
-		if let ix1 = pVCs.indexOf(vc1) {
-			if let ix2 = pVCs.indexOf(vc1) {
-				dir = ix1 < ix2 ? vUP : vDOWN
-			}
-		}
+		let dir : CGFloat = isPushing ? vUP : vDOWN
 		
 		var r1end = r1start
 		r1end.origin.y -= r1end.size.height * dir

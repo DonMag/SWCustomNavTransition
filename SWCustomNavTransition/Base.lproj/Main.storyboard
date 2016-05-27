@@ -107,7 +107,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <outlet property="delegate" destination="0oF-mt-CHK" id="96l-8W-J2e"/>
+                        <outlet property="delegate" destination="0oF-mt-CHK" id="etT-ri-Nco"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="u45-qJ-rUC"/>
                     </connections>
                 </navigationController>
