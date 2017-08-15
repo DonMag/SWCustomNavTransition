@@ -11,32 +11,33 @@ import UIKit
 class VertTransAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 
 	let isPushing : Bool
-	let duration : NSTimeInterval = 0.5
+	let duration : TimeInterval = 0.5
 	
 	init(isPushing: Bool) {
 		self.isPushing = isPushing
 		super.init()
 	}
 
-	func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+	func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
 		return duration
 	}
 	
-	func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+	func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
 		guard
-			let vc1 = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey),
-			let vc2 = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey),
-			let con = transitionContext.containerView()
+			let vc1 = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
+			let vc2 = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
 			else {
 				return
 		}
 		
-		let r1start = transitionContext.initialFrameForViewController(vc1)
-		let r2end = transitionContext.finalFrameForViewController(vc2)
+		let con = transitionContext.containerView
+		
+		let r1start = transitionContext.initialFrame(for: vc1)
+		let r2end = transitionContext.finalFrame(for: vc2)
 		
 		guard
-			let v1 = transitionContext.viewForKey(UITransitionContextFromViewKey),
-			let v2 = transitionContext.viewForKey(UITransitionContextToViewKey)
+			let v1 = transitionContext.view(forKey: UITransitionContextViewKey.from),
+			let v2 = transitionContext.view(forKey: UITransitionContextViewKey.to)
 			else {
 				return
 		}
@@ -53,14 +54,14 @@ class VertTransAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 		v2.frame = r2start
 		con.addSubview(v2)
 		
-		UIApplication.sharedApplication().beginIgnoringInteractionEvents()
-		UIView.animateWithDuration(0.4, animations: {
+		UIApplication.shared.beginIgnoringInteractionEvents()
+		UIView.animate(withDuration: 0.4, animations: {
 			v1.frame = r1end
 			v2.frame = r2end
 			}, completion: {
 				_ in
 				transitionContext.completeTransition(true)
-				UIApplication.sharedApplication().endIgnoringInteractionEvents()
+				UIApplication.shared.endIgnoringInteractionEvents()
 		})
 	}
 		

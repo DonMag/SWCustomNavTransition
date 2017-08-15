@@ -10,10 +10,10 @@ import UIKit
 
 class NavControllerDelegate: NSObject, UINavigationControllerDelegate {
 
-	func navigationController(navigationController: UINavigationController,
-		animationControllerForOperation operation: UINavigationControllerOperation,
-		fromViewController fromVC: UIViewController,
-		toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+	func navigationController(_ navigationController: UINavigationController,
+		animationControllerFor operation: UINavigationControllerOperation,
+		from fromVC: UIViewController,
+		to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 
 			// if you only want custom transition on Pop, uncomment these next 3 lines
 //			if operation != .Pop {
@@ -22,7 +22,7 @@ class NavControllerDelegate: NSObject, UINavigationControllerDelegate {
 
 			var bPushing : Bool = true
 			
-			if operation == .Pop {
+			if operation == .pop {
 				bPushing = false
 			}
 			
